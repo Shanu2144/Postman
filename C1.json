@@ -1,0 +1,277 @@
+{
+	"info": {
+		"_postman_id": "a9a1f630-45c6-4ba2-be1f-b0aba49199b5",
+		"name": "WORKSPACE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "LISTUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"pm.environment.unset(\"variable_key\");\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users?page=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(\"Hello Word..\");\r",
+									"\r",
+									"let urlVar = pm.variables.get(\"url\");\r",
+									"console.log(\"Value for url variables is : \"+urlVar);\r",
+									"pm.variables.set(\"name\", \"POSTMAN\");\r",
+									"console.log(pm.variables.get(\"name\"));\r",
+									"\r",
+									"let globalVar = pm.globals.get(\"Env\");\r",
+									"console.log(globalVar);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"I am in Pre-request Script session\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ScriptsTest",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "User Registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/{{endpoint}}",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"{{endpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST2",
+			"item": [
+				{
+					"name": "RegisterUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Contains email\"] = responseBody.has(data.email);\r",
+									"tests[\"Contains password\"] = responseBody.has(data[\"password\"]);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/{{endpoint}}",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"{{endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GitHub",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1296269,\r\n    \"node_id\": \"MDEwOlJlcG9zaXRvcnkxMjk2MjY5\",\r\n    \"name\": \"Hello-World GitHub\",\r\n    \"full_name\": \"octocat/Hello-World\",\r\n    \"owner\": {\r\n        \"login\": \"octocat\",\r\n        \"id\": 1,\r\n        \"node_id\": \"MDQ6VXNlcjE=\",\r\n        \"avatar_url\": \"https://github.com/images/error/octocat_happy.gif\",\r\n        \"gravatar_id\": \"\",\r\n        \"url\": \"https://api.github.com/users/octocat\",\r\n        \"html_url\": \"https://github.com/octocat\",\r\n        \"followers_url\": \"https://api.github.com/users/octocat/followers\",\r\n        \"following_url\": \"https://api.github.com/users/octocat/following{/other_user}\",\r\n        \"gists_url\": \"https://api.github.com/users/octocat/gists{/gist_id}\",\r\n        \"starred_url\": \"https://api.github.com/users/octocat/starred{/owner}{/repo}\",\r\n        \"subscriptions_url\": \"https://api.github.com/users/octocat/subscriptions\",\r\n        \"organizations_url\": \"https://api.github.com/users/octocat/orgs\",\r\n        \"repos_url\": \"https://api.github.com/users/octocat/repos\",\r\n        \"events_url\": \"https://api.github.com/users/octocat/events{/privacy}\",\r\n        \"received_events_url\": \"https://api.github.com/users/octocat/received_events\",\r\n        \"type\": \"User\",\r\n        \"site_admin\": false\r\n    },\r\n    \"private\": false,\r\n    \"html_url\": \"https://github.com/octocat/Hello-World\",\r\n    \"description\": \"This your first repo!\",\r\n    \"fork\": false,\r\n    \"url\": \"https://api.github.com/repos/octocat/Hello-World\",\r\n    \"archive_url\": \"https://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}\",\r\n    \"assignees_url\": \"https://api.github.com/repos/octocat/Hello-World/assignees{/user}\",\r\n    \"blobs_url\": \"https://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}\",\r\n    \"branches_url\": \"https://api.github.com/repos/octocat/Hello-World/branches{/branch}\",\r\n    \"collaborators_url\": \"https://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}\",\r\n    \"comments_url\": \"https://api.github.com/repos/octocat/Hello-World/comments{/number}\",\r\n    \"commits_url\": \"https://api.github.com/repos/octocat/Hello-World/commits{/sha}\",\r\n    \"compare_url\": \"https://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}\",\r\n    \"contents_url\": \"https://api.github.com/repos/octocat/Hello-World/contents/{+path}\",\r\n    \"contributors_url\": \"https://api.github.com/repos/octocat/Hello-World/contributors\",\r\n    \"deployments_url\": \"https://api.github.com/repos/octocat/Hello-World/deployments\",\r\n    \"downloads_url\": \"https://api.github.com/repos/octocat/Hello-World/downloads\",\r\n    \"events_url\": \"https://api.github.com/repos/octocat/Hello-World/events\",\r\n    \"forks_url\": \"https://api.github.com/repos/octocat/Hello-World/forks\",\r\n    \"git_commits_url\": \"https://api.github.com/repos/octocat/Hello-World/git/commits{/sha}\",\r\n    \"git_refs_url\": \"https://api.github.com/repos/octocat/Hello-World/git/refs{/sha}\",\r\n    \"git_tags_url\": \"https://api.github.com/repos/octocat/Hello-World/git/tags{/sha}\",\r\n    \"git_url\": \"git:github.com/octocat/Hello-World.git\",\r\n    \"issue_comment_url\": \"https://api.github.com/repos/octocat/Hello-World/issues/comments{/number}\",\r\n    \"issue_events_url\": \"https://api.github.com/repos/octocat/Hello-World/issues/events{/number}\",\r\n    \"issues_url\": \"https://api.github.com/repos/octocat/Hello-World/issues{/number}\",\r\n    \"keys_url\": \"https://api.github.com/repos/octocat/Hello-World/keys{/key_id}\",\r\n    \"labels_url\": \"https://api.github.com/repos/octocat/Hello-World/labels{/name}\",\r\n    \"languages_url\": \"https://api.github.com/repos/octocat/Hello-World/languages\",\r\n    \"merges_url\": \"https://api.github.com/repos/octocat/Hello-World/merges\",\r\n    \"milestones_url\": \"https://api.github.com/repos/octocat/Hello-World/milestones{/number}\",\r\n    \"notifications_url\": \"https://api.github.com/repos/octocat/Hello-World/notifications{?since,all,participating}\",\r\n    \"pulls_url\": \"https://api.github.com/repos/octocat/Hello-World/pulls{/number}\",\r\n    \"releases_url\": \"https://api.github.com/repos/octocat/Hello-World/releases{/id}\",\r\n    \"ssh_url\": \"git@github.com:octocat/Hello-World.git\",\r\n    \"stargazers_url\": \"https://api.github.com/repos/octocat/Hello-World/stargazers\",\r\n    \"statuses_url\": \"https://api.github.com/repos/octocat/Hello-World/statuses/{sha}\",\r\n    \"subscribers_url\": \"https://api.github.com/repos/octocat/Hello-World/subscribers\",\r\n    \"subscription_url\": \"https://api.github.com/repos/octocat/Hello-World/subscription\",\r\n    \"tags_url\": \"https://api.github.com/repos/octocat/Hello-World/tags\",\r\n    \"teams_url\": \"https://api.github.com/repos/octocat/Hello-World/teams\",\r\n    \"trees_url\": \"https://api.github.com/repos/octocat/Hello-World/git/trees{/sha}\",\r\n    \"clone_url\": \"https://github.com/octocat/Hello-World.git\",\r\n    \"mirror_url\": \"git:git.example.com/octocat/Hello-World\",\r\n    \"hooks_url\": \"https://api.github.com/repos/octocat/Hello-World/hooks\",\r\n    \"svn_url\": \"https://svn.github.com/octocat/Hello-World\",\r\n    \"homepage\": \"https://github.com\",\r\n    \"organization\": null,\r\n    \"language\": null,\r\n    \"forks\": 9,\r\n    \"forks_count\": 9,\r\n    \"stargazers_count\": 80,\r\n    \"watchers_count\": 80,\r\n    \"watchers\": 80,\r\n    \"size\": 108,\r\n    \"default_branch\": \"master\",\r\n    \"open_issues\": 0,\r\n    \"open_issues_count\": 0,\r\n    \"is_template\": true,\r\n    \"license\": {\r\n        \"key\": \"mit\",\r\n        \"name\": \"MIT License\",\r\n        \"url\": \"https://api.github.com/licenses/mit\",\r\n        \"spdx_id\": \"MIT\",\r\n        \"node_id\": \"MDc6TGljZW5zZW1pdA==\",\r\n        \"html_url\": \"https://api.github.com/licenses/mit\"\r\n    },\r\n    \"topics\": [\r\n        \"octocat\",\r\n        \"atom\",\r\n        \"electron\",\r\n        \"api\"\r\n    ],\r\n    \"has_issues\": true,\r\n    \"has_projects\": true,\r\n    \"has_wiki\": true,\r\n    \"has_pages\": false,\r\n    \"has_downloads\": true,\r\n    \"archived\": false,\r\n    \"disabled\": false,\r\n    \"visibility\": \"public\",\r\n    \"pushed_at\": \"2011-01-26T19:06:43Z\",\r\n    \"created_at\": \"2011-01-26T19:01:12Z\",\r\n    \"updated_at\": \"2011-01-26T19:14:43Z\",\r\n    \"permissions\": {\r\n        \"admin\": false,\r\n        \"push\": false,\r\n        \"pull\": true\r\n    },\r\n    \"allow_rebase_merge\": true,\r\n    \"template_repository\": null,\r\n    \"temp_clone_token\": \"ABTLWHOULUVAXGTRYU7OC2876QJ2O\",\r\n    \"allow_squash_merge\": true,\r\n    \"allow_auto_merge\": false,\r\n    \"delete_branch_on_merge\": true,\r\n    \"allow_merge_commit\": true,\r\n    \"subscribers_count\": 42,\r\n    \"network_count\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.github.com/user/repos",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"console.log(\"Hello Word..\");",
+					"",
+					"let urlVar = pm.variables.get(\"url\");",
+					"console.log(\"Value for url variables is : \"+urlVar);",
+					"pm.variables.set(\"name\", \"POSTMAN\");",
+					"console.log(pm.variables.get(\"name\"));",
+					"",
+					"let globalVar = pm.globals.get(\"Env\");",
+					"console.log(globalVar);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://reqres.in",
+			"type": "string"
+		}
+	]
+}
